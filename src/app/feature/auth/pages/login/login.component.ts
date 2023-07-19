@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { lastValueFrom } from 'rxjs';
+import { AuthLoginDto } from 'src/app/core/dto/authLoginRequestDto';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { TokenService } from 'src/app/core/services/token.service';
 import { AppBaseComponent } from 'src/app/core/utils/AppBaseComponent';
 
 @Component({
@@ -8,7 +12,7 @@ import { AppBaseComponent } from 'src/app/core/utils/AppBaseComponent';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent extends AppBaseComponent{
+export class LoginComponent extends AppBaseComponent {
 
 
   /*
@@ -16,38 +20,44 @@ export class LoginComponent extends AppBaseComponent{
   */
   public loginForm: FormGroup;
 
-  constructor(private router: Router, private fb: FormBuilder) { 
+  constructor(private router: Router, private fb: FormBuilder,
+     private authService: AuthService,private tokenService : TokenService) {
     super();
     this.loginForm = this.fb.group({
-        email: ['',[Validators.required,Validators.email] ],
-        password: ['',Validators.required ]
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required]
     });
   }
 
-  public signIn(): void {
+  public async signIn(): Promise<void> {
     //Evitar usar el any , debemos usar Modelos
-    let dtoLogin = {};
+    let dtoLogin: AuthLoginDto;
 
-    if (this.loginForm.valid){
+    if (this.loginForm.valid) {
       alert("Me presionaron");
       let email = this.loginForm.get('email').value;
       let password = this.loginForm.get('password').value;
       dtoLogin = {
-          email,password
+        email, password
       }
       //Añadir un nuevo valor a la estructura del objeto dtoLogin
       /*dtoLogin = {
         ...dtoLogin,
-        "nuevoValor" : "nuevo"
+        "nuevoValor" : "/portafolio"
       }*/
 
-      console.log(dtoLogin);
-      
-    }else{
+      await lastValueFrom(this.authService.signIn(dtoLogin));
+
+      console.log(this.tokenService.getToken());
+
+      await this.router.navigateByUrl("/portafolio")
+
+    } else {
       alert("Hay errores en el formulario");
-    console.log(this.getAllErrorsForm(this.loginForm));
+      console.log(this.getAllErrorsForm(this.loginForm));
+      this.loginForm.markAllAsTouched();
     }
-    
+
   }
   /*
     public signUp(): void{
@@ -56,20 +66,20 @@ export class LoginComponent extends AppBaseComponent{
     NAVEGACION MEDIANTE LA CLASE ROUTER
     */
 
-    public getErrorForm(field: string): string{
-      let message;
+  public getErrorForm(field: string): string {
+    let message;
 
-      if (this.isTouchedField(this.loginForm, field)){
-        if(this.loginForm.get(field).hasError('required')){
-          message = 'El campo es requerido';
-        }else if(this.loginForm.get(field).hasError('email')){
-          message = 'Requiere el formato de email';
-        }
+    if (this.isTouchedField(this.loginForm, field)) {
+      if (this.loginForm.get(field).hasError('required')) {
+        message = 'El campo es requerido';
+      } else if (this.loginForm.get(field).hasError('email')) {
+        message = 'Requiere el formato de email';
       }
-
-
-      return message;
     }
+
+
+    return message;
+  }
 
   ngOnInit(): void {
   }
