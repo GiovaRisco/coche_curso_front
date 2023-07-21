@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
 import { AuthLoginDto } from 'src/app/core/dto/authLoginRequestDto';
+import { ErrorsForm } from 'src/app/core/enums/ErrorsForm';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { TokenService } from 'src/app/core/services/token.service';
 import { AppBaseComponent } from 'src/app/core/utils/AppBaseComponent';
@@ -65,15 +66,19 @@ export class LoginComponent extends AppBaseComponent {
     }
     NAVEGACION MEDIANTE LA CLASE ROUTER
     */
-
+/*
+    Retorna mensaje de erroe de un campo del formulario
+*/
   public getErrorForm(field: string): string {
     let message;
 
     if (this.isTouchedField(this.loginForm, field)) {
       if (this.loginForm.get(field).hasError('required')) {
-        message = 'El campo es requerido';
+        message = ErrorsForm.REQUIRED;
+
       } else if (this.loginForm.get(field).hasError('email')) {
-        message = 'Requiere el formato de email';
+        message = ErrorsForm.EMAIL_FORMAT;
+
       }
     }
 
