@@ -7,6 +7,7 @@ import { ErrorsForm } from 'src/app/core/enums/ErrorsForm';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { TokenService } from 'src/app/core/services/token.service';
 import { AppBaseComponent } from 'src/app/core/utils/AppBaseComponent';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-login',
@@ -54,7 +55,11 @@ export class LoginComponent extends AppBaseComponent {
       await this.router.navigateByUrl("/portafolio")
 
     } else {
-      alert("Hay errores en el formulario");
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Hay errores en el formulario, reviselo por favor'
+      });
       console.log(this.getAllErrorsForm(this.loginForm));
       this.loginForm.markAllAsTouched();
     }
