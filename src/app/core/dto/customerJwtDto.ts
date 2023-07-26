@@ -11,4 +11,6 @@ export interface CustomerJwtDto{
     "iat" : number;
 
     "exp" : number;
+
+    "rol" : string;
 }

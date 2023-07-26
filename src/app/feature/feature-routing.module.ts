@@ -14,6 +14,11 @@ const routes: Routes = [
     path: "portafolio",
     canActivate: [() => inject(GuardPruebaService).canActiveWithoutAuth()],
     loadChildren: () => import("./home/home.module").then(a => a.HomeModule)
+  },
+  {
+    path:"admin",
+    canActivate: [() => inject(GuardPruebaService).canActiveWithRoleAdmin()],
+    loadChildren: () => import("./admin/admin.module").then(a => a.AdminModule)
   }
 ];
 

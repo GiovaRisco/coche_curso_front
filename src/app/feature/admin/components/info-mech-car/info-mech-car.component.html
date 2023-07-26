@@ -1,0 +1,72 @@
+<!-- Section: Design Block -->
+<section class="text-center text-lg-start">
+    <style>
+      .cascading-right {
+        margin-right: -50px;
+      }
+  
+      @media (max-width: 991.98px) {
+        .cascading-right {
+          margin-right: 0;
+        }
+      }
+    </style>
+  
+    <!-- Jumbotron -->
+    <div class="container py-4">
+      <div class="row g-0 align-items-center">
+        <div class="col-lg-6 mb-5 mb-lg-0">
+          <div class="card cascading-right" style="
+              background: hsla(0, 0%, 100%, 0.55);
+              backdrop-filter: blur(30px);
+              ">
+            <div class="card-body p-5 shadow-5 text-center">
+              <form role="form" [formGroup] = "infoMechForm">
+     
+                <!-- Password input -->
+                <div class="form-outline mb-4">
+                  <input formControlName="horsePower" type="number" id="horsePower"
+                   class="form-control" placeholder="Caballos de Fuerza"/>
+                  <label class="form-label" for="horsePower">Caballos de Fuerza </label>
+                </div>
+
+                <div class="form-outline mb-4">
+                    <input formControlName="engineDisplacement" type="number" id="engineDisplacement"
+                     class="form-control" placeholder="Cilindraje"/>
+                    <label class="form-label" for="engineDisplacement">Cilindraje </label>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <input formControlName="transmission" type="text" id="transmission"
+                     class="form-control" placeholder="Transmicion"/>
+                    <label class="form-label" for="transmission">Transmicion </label>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <input formControlName="fuelType" type="text" id="fuelType"
+                     class="form-control" placeholder="Tipo de Combustible"/>
+                    <label class="form-label" for="fuelType">Tipo de Combustible</label>
+                  </div>
+                  <div class="form-outline mb-4">
+                    <input formControlName="traction" type="number" id="traction"
+                     class="form-control" placeholder="Traccion"/>
+                    <label class="form-label" for="traction">Traccion</label>
+                  </div>
+                  <div class="form-outline mb-4">
+                    <input formControlName="steering" type="text" id="steering"
+                     class="form-control" placeholder="Direccion"/>
+                    <label class="form-label" for="steering">Direccion</label>
+                  </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Jumbotron -->
+  </section>
+  <!-- Section: Design Block -->
+
+
+
