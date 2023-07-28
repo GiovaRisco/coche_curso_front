@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { CarService } from 'src/app/core/services/car.service';
 import { TokenService } from 'src/app/core/services/token.service';
 
 @Component({
@@ -6,24 +8,25 @@ import { TokenService } from 'src/app/core/services/token.service';
   templateUrl: './header-nav.component.html',
   styleUrls: ['./header-nav.component.css']
 })
-export class HeaderNavComponent implements OnInit {
+export class HeaderNavComponent {
 
   public nameCustomer: string;
 
   public emailCustomer: string; 
 
-  constructor(private tokenService: TokenService) {
+  public numberProducts: number = 0;
 
+  public subscriptionNumber: Subscription;
+
+  constructor(private tokenService: TokenService, private carService: CarService) {
+    
     this.nameCustomer =  this.tokenService.getInfoToken().fullname;
     this.emailCustomer = this.tokenService.getInfoToken().email;
-    console.log(this.nameCustomer);
+    this.subscriptionNumber = this.carService.getFilesAdded.subscribe({
+      next: value => {
+        this.numberProducts = value;
+      }
+    })
    }
-
-
-
-
-
-  ngOnInit(): void {
-  }
 
 }

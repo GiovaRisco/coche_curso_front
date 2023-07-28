@@ -1,0 +1,62 @@
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Codigo Factura</th>
+                <th scope="col">Cedula Cliente</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Total</th>
+                <th scope="col">Método de Pago</th>
+                <th scope="col">Ver coches</th>
+            </tr>
+        </thead>
+        <tbody>
+    
+            <tr class="table-success" *ngFor="let purchase of historyPurchases">
+                <td>{{purchase.numberBill}}</td>
+                <td>{{purchase.cardIdCustomer}}</td>
+                <td>{{purchase.date}}</td>
+                <td>{{purchase.total}}</td>
+                <td>{{purchase.paymentMethod}}</td>
+                <td><button class="btn btn-info" data-bs-toggle = "modal" data-bs-target = "#lista-coches" (click)="showListCarsPurchase(purchase.carsPurchase)">Click</button></td>
+            </tr>
+    
+        </tbody>
+    </table>
+</div>
+
+
+<div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="lista-coches" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-tile " id="exampleModalLabel">Lista de coches comprados</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Referencia</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                
+                        <tr class="table-success" *ngFor="let car of carsPurchase">
+                            <td>{{car.referenceCar}}</td>
+                            <td>{{car.cuantityCars}}</td>
+                            <td>{{car.totalPriceCars}}</td>
+                           </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

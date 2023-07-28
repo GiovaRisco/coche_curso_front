@@ -16,13 +16,18 @@ export class PortfolioComponent implements OnInit {
   public carsPurchase: CarsPurchaseDto[] ;
 
   constructor(private carService: CarService) {
-    this.carsPurchase = [];
+    
     this.carService.getAllCars().subscribe({
       next: value => {
         this.listCarsPortfolio = value;
         console.log(this.listCarsPortfolio)
       }
     })
+  }
+
+  ngOnInit(): void {
+    this.carsPurchase = JSON.parse(localStorage.getItem("carsPurchase")) ? JSON.parse(localStorage.getItem("carsPurchase")) : [] ;
+    
   }
 
   //Agrega un coche al carrito
@@ -63,9 +68,10 @@ export class PortfolioComponent implements OnInit {
 
     console.log("Coche agregado" , this.carsPurchase)
     localStorage.setItem('carsPurchase', JSON.stringify(this.carsPurchase));
-
+    this.carService.setNumberProducts();
   }
 
+ 
 
 
   //Elimina un coche del carrito
@@ -97,10 +103,9 @@ export class PortfolioComponent implements OnInit {
       console.log("Coche eliminado" ,  this.carsPurchase);
       
     localStorage.setItem('carsPurchase', JSON.stringify(this.carsPurchase));
-
+    this.carService.setNumberProducts();
   }
 
-  ngOnInit(): void {
-  }
+
 
 }
