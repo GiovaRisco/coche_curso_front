@@ -24,7 +24,8 @@ export class RegisterCarComponent extends AppBaseComponent {
           reference:['',Validators.required],
           price:['',Validators.required],
           modelYear:['',[Validators.required, CustomValidators.numberDateFuture]],
-          category:['',Validators.required]
+          category:['',Validators.required],
+          stock:['',Validators.required]
         }),
         infoMechForm:this.fb.group({
           horsePower:['',Validators.required],

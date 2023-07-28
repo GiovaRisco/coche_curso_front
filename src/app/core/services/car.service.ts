@@ -14,8 +14,8 @@ export class CarService {
 
   private url:string = environment.apiUrl;
 
-  public getAllCars(): Observable<any[]>{
-    return this.http.get<any[]>(this.url + "/cars");
+  public getAllCars(): Observable<CarDto[]>{
+    return this.http.get<CarDto[]>(this.url + "/cars");
   }
 
   public registerCar(newCar: CarDto):Observable<CarDto>{

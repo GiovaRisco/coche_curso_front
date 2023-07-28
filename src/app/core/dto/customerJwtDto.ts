@@ -1,6 +1,6 @@
 export interface CustomerJwtDto{
 
-    "cardiD" : string;
+    "cardId" : string;
 
     "fullname" : string;
 
