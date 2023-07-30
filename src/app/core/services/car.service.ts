@@ -6,6 +6,7 @@ import { AppModule } from 'src/app/app.module';
 import { environment } from 'src/environments/environment.prod';
 import { CarDto } from '../dto/carDto';
 import { CarsPurchaseDto } from '../dto/carsPurchaseDto';
+const { apiUrl } = environment;
 
 @Injectable({
   providedIn: 'root'
@@ -19,14 +20,14 @@ export class CarService {
     this.setNumberProducts();
   }
 
-  private url:string = environment.apiUrl;
+  //private url:string = environment.apiUrl;
 
   public getAllCars(): Observable<CarDto[]>{
-    return this.http.get<CarDto[]>(this.url + "/cars");
+    return this.http.get<CarDto[]>(`${apiUrl}/cars`);
   }
 
   public registerCar(newCar: CarDto):Observable<CarDto>{
-    return this.http.post<CarDto>(this.url + "/cars",newCar);
+    return this.http.post<CarDto>(`${apiUrl}/cars`,newCar);
   }
 
   public setNumberProducts(): void{

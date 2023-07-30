@@ -8,18 +8,19 @@ import { AuthLoginResponseDto } from '../dto/authLoginResponseDto';
 import { TokenService } from './token.service';
 import { RegisterRequestDto } from '../dto/registerRequestDto';
 import { RegisterResponseDto } from '../dto/registerResponseDto';
+const { apiUrl } = environment;
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private apiUrl:string = environment.apiUrl;
+  //private apiUrl:string = environment.apiUrl;
 
   constructor(private http: HttpClient,private tokenService: TokenService) { }
 
   public signIn(authDto: AuthLoginDto): Observable<AuthLoginResponseDto>{
-    return this.http.post<AuthLoginResponseDto>(this.apiUrl + "/auth/sign-in",authDto).pipe(
+    return this.http.post<AuthLoginResponseDto>(`${apiUrl}/auth/sign-in`,authDto).pipe(
       tap(response => {
         this.tokenService.saveToken(response.jwt);
       })
@@ -28,6 +29,6 @@ export class AuthService {
 
 
   public register(registerDto: RegisterRequestDto ): Observable<RegisterResponseDto>{
-      return this.http.post<RegisterResponseDto>(this.apiUrl + "/auth/register",registerDto);
+      return this.http.post<RegisterResponseDto>(`${apiUrl}/auth/register`,registerDto);
   }
 }
