@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AppModule } from 'src/app/app.module';
-import { environment } from 'src/environments/environment';
+
+import { environment } from 'src/environments/environment.prod';
 import { CarDto } from '../dto/carDto';
 import { CarsPurchaseDto } from '../dto/carsPurchaseDto';
 
