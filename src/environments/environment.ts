@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: "http://cochescurso-production.up.railway.app/api"
+  apiUrl: "https://cochescurso-production.up.railway.app/api"
 };
 
 /*

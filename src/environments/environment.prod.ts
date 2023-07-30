@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: "http://cochescurso-production.up.railway.app/api"
+  apiUrl: "https://cochescurso-production.up.railway.app/api"
 };
